@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     # Third-party apps
     'rest_framework',
     'shell_plus',
+    'django_nose',
 
     # Local apps
     'api',
