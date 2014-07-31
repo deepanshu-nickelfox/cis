@@ -1,6 +1,5 @@
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
-from model_mommy import mommy
 from rest_framework import status
 from rest_framework.test import APITestCase
 
@@ -25,7 +24,6 @@ class UserTestAuthentication(APITestCase):
         get_user_model().objects.create_superuser('test', 'test')
         ret = self.client.login(email='test', password='test')
         self.assertTrue(ret)
-        self.client.login(email='test', password='test')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
@@ -33,26 +31,23 @@ class UserTestAuthentication(APITestCase):
 class UserTestAPI(APITestCase):
 
     def setUp(self):
-        password = '12345'
-        self.user = mommy.make(
-            get_user_model(),
-            is_active=True,
-            is_superuser=True
-        )
-        self.user.set_password(password)
-        self.user.save()
-        self.client.login(email=self.user.email, password=password)
+        self.user = get_user_model().objects.create_superuser('test', 'test')
+        ret = self.client.login(email='test', password='test')
+        self.assertTrue(ret)
 
     def test_get_list(self):
-
         url = reverse('api-v1:user-list')
         response = self.client.get(url)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 1)
 
-        result_user = response.data[0]
-        self.assertDictEqual(result_user, {
+    def test_get_detail(self):
+        url = reverse('api-v1:user-detail', kwargs={'pk': self.user.pk})
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertDictEqual(response.data, {
             'id': self.user.id,
             'email': self.user.email,
             'user_permissions': [],

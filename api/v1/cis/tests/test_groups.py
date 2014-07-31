@@ -26,7 +26,6 @@ class GroupTestAuthentication(APITestCase):
         get_user_model().objects.create_superuser('test', 'test')
         ret = self.client.login(email='test', password='test')
         self.assertTrue(ret)
-        self.client.login(email='test', password='test')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
@@ -37,11 +36,9 @@ class GroupTestAPI(APITestCase):
         get_user_model().objects.create_superuser('test', 'test')
         ret = self.client.login(email='test', password='test')
         self.assertTrue(ret)
-        self.client.login(email='test', password='test')
 
     def test_get_list(self):
-
-        obj = mommy.make(Group)
+        mommy.make(Group)
 
         url = reverse('api-v1:group-list')
         response = self.client.get(url)
@@ -49,9 +46,15 @@ class GroupTestAPI(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 1)
 
-        result_obj = response.data[0]
-        self.assertDictEqual(result_obj, {
-            'id': obj.id,
-            'name': obj.name,
+    def test_get_details(self):
+        group = mommy.make(Group)
+
+        url = reverse('api-v1:group-detail', kwargs={'pk': group.pk})
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertDictEqual(response.data, {
+            'id': group.id,
+            'name': group.name,
             'permissions': [],
         })

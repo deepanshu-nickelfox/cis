@@ -108,3 +108,5 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
+
+PASSWORD_MAX_LENGTH = 32
