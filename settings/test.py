@@ -1,6 +1,6 @@
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 NOSE_ARGS = [
-    '--verbosity=2',
+    '--verbosity=1',
     '--nologcapture',  # prevent sql log capturing (dont want to be flooded)
     '--with-id',  # it is always handy to be able to run test by it's number
     '--with-timer',  # to enable execution time reporting

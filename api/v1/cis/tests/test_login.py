@@ -13,3 +13,8 @@ class TestLogin(APITestCase):
         url = reverse('api-v1-login')
         response = self.client.post(url, data={'email': 'test', 'password': 'test'})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_invalid_login(self):
+        url = reverse('api-v1-login')
+        response = self.client.post(url, data={'email': 'invalidemail', 'password': 'invalid password'})
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
