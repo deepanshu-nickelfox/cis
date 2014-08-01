@@ -59,6 +59,11 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     user_permissions = serializers.RelatedField(many=True)
     groups = serializers.RelatedField(many=True)
     middle_name = serializers.CharField(required=False, blank=True)
+    password = serializers.CharField(
+        max_length=settings.PASSWORD_MAX_LENGTH,
+        required=False,
+        write_only=True,
+    )
 
     class Meta:
         model = get_user_model()
@@ -75,11 +80,11 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             'is_superuser',
             'password',
         )
-        write_only_fields = ('password', )
 
     def restore_object(self, attrs, instance=None):
         user = super(UserSerializer, self).restore_object(attrs, instance)
-        user.set_password(attrs['password'])
+        if 'password' in attrs:
+            user.set_password(attrs['password'])
         return user
 
 
