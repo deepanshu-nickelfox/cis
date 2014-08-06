@@ -10,7 +10,7 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-BASE_DIR = os.path.dirname(__file__)
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -39,9 +39,10 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     # Third-party apps
-    'rest_framework',
+    'tastypie',
     'shell_plus',
     'django_nose',
+    'django_extensions',
 
     # Local apps
     'api',
@@ -97,21 +98,7 @@ STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'cis.User'
 
-REST_FRAMEWORK = {
-    # Use hyperlinked styles by default.
-    # Only used if the `serializer_class` attribute is not set on a view.
-    'DEFAULT_MODEL_SERIALIZER_CLASS':
-        'rest_framework.serializers.HyperlinkedModelSerializer',
+# TODO: remove from production
+TASTYPIE_FULL_DEBUG = True
 
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ],
-
-    'DEFAULT_PARSER_CLASSES': [
-        'rest_framework.parsers.JSONParser',
-    ]
-}
-
-PASSWORD_MAX_LENGTH = 32
+TASTYPIE_DATETIME_FORMATTING = "%Y-%m-%d %H:%M:%S"
