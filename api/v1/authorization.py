@@ -1,3 +1,4 @@
+from django.conf import settings
 from tastypie.exceptions import Unauthorized
 from tastypie.authorization import DjangoAuthorization
 
@@ -21,6 +22,10 @@ class ReadRestrictedDjangoAuthorization(DjangoAuthorization):
 
         if klass is False:
             raise Unauthorized("You are not allowed to access that resource.")
+
+        # Check if read-privileges feature is enabled
+        if not settings.FEATURE_REQUIRE_READ_PRIVILEGES:
+            return True
 
         permission = '%s.read_%s' % (klass._meta.app_label, klass._meta.model_name)
         if not bundle.request.user.has_perm(permission):

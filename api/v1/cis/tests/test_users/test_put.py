@@ -9,18 +9,19 @@ from tastypie.authentication import Authentication
 from tastypie.test import ResourceTestCase
 
 
-@patch('api.v1.hr.users.UsersResource._meta.authentication', Authentication())
-@patch('api.v1.hr.users.UsersResource._meta.authorization', Authorization())
+@patch('api.v1.cis.users.UsersResource._meta.authentication', Authentication())
+@patch('api.v1.cis.users.UsersResource._meta.authorization', Authorization())
 class Test(ResourceTestCase):
 
-    def test_patch_detail(self):
+    def test_put_detail(self):
         obj = mommy.make(get_user_model())
         detail_url = reverse('api_dispatch_detail', kwargs={'resource_name': 'users', 'pk': obj.pk})
         data = {
             'first_name': str(uuid.uuid4())
         }
-        resp = self.api_client.patch(detail_url, data=data)
-        self.assertHttpAccepted(resp)
+        resp = self.api_client.put(detail_url, data=data)
+        self.assertValidJSONResponse(resp)
+
         obj = get_user_model().objects.get(pk=obj.pk)
         self.assertEqual(obj.first_name, data['first_name'])
 
@@ -38,6 +39,8 @@ class Test(ResourceTestCase):
             'first_name': obj.first_name,
             'middle_name': obj.middle_name,
             'sex': obj.sex,
+            'pk': str(obj.pk),  # todo ##fixme##
             'user_permissions': [],
             'groups': [],
+            'position': None,
         })

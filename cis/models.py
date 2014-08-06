@@ -1,7 +1,10 @@
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, \
     BaseUserManager
 from django.db import models
+from django.db.models.signals import pre_save, post_save
 from django_extensions.db.models import TimeStampedModel
+from cis import signals
+from hr.models import Position
 
 
 class UserManager(BaseUserManager):
@@ -44,6 +47,9 @@ class User(AbstractBaseUser, PermissionsMixin, TimeStampedModel):
 
     is_active = models.BooleanField(default=True)
 
+    position = models.ForeignKey(
+        Position, null=True, blank=True, on_delete=models.PROTECT)
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
@@ -74,3 +80,16 @@ class User(AbstractBaseUser, PermissionsMixin, TimeStampedModel):
         permissions = (
             ("read_user", "Can read user"),
         )
+
+
+pre_save.connect(
+    signals.sync_user_groups_when_position_changes,
+    sender=User)
+
+post_save.connect(
+    signals.sync_user_groups_when_user_created_with_position,
+    sender=User)
+
+pre_save.connect(
+    signals.sync_user_groups_when_department_changes,
+    sender=Position)

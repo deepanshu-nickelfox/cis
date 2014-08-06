@@ -8,8 +8,8 @@ from tastypie.authentication import Authentication
 from tastypie.test import ResourceTestCase
 
 
-@patch('api.v1.hr.users.UsersResource._meta.authentication', Authentication())
-@patch('api.v1.hr.users.UsersResource._meta.authorization', Authorization())
+@patch('api.v1.cis.users.UsersResource._meta.authentication', Authentication())
+@patch('api.v1.cis.users.UsersResource._meta.authorization', Authorization())
 class Test(ResourceTestCase):
 
     def setUp(self):
@@ -40,6 +40,7 @@ class Test(ResourceTestCase):
             'sex': self.obj.sex,
             'user_permissions': [],
             'groups': [],
+            'position': None,
         })
 
     def test_get_detail(self):
@@ -64,4 +65,5 @@ class Test(ResourceTestCase):
             'sex': self.obj.sex,
             'user_permissions': [],
             'groups': [],
+            'position': None,
         })

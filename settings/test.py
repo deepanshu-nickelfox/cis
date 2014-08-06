@@ -13,3 +13,5 @@ NOSE_ARGS = [
 PASSWORD_HASHERS = (
     'django.contrib.auth.hashers.SHA1PasswordHasher',
 )
+
+FEATURE_AUTO_SYNC_USER_POSITION_GROUP = False
