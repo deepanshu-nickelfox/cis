@@ -38,6 +38,7 @@ class Test(ResourceTestCase):
             'first_name': self.obj.first_name,
             'middle_name': self.obj.middle_name,
             'sex': self.obj.sex,
+            'user_permissions': [],
         })
 
     def test_get_detail(self):
@@ -60,4 +61,5 @@ class Test(ResourceTestCase):
             'first_name': self.obj.first_name,
             'middle_name': self.obj.middle_name,
             'sex': self.obj.sex,
+            'user_permissions': [],
         })
