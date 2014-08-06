@@ -15,7 +15,7 @@ class AuthResource(Resource):
         authorization = Authorization()
         allowed_methods = ['get', 'post']
 
-    def override_urls(self):
+    def prepend_urls(self):
         return [
             url(r"^(?P<resource_name>%s)/login%s$" %
                 (self._meta.resource_name, trailing_slash()),
