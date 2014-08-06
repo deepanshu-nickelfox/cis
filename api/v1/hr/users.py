@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model
-from api.v2.authorization import ReadRestrictedDjangoAuthorization
+from api.v1.authorization import ReadRestrictedDjangoAuthorization
 from tastypie.authentication import SessionAuthentication
 from tastypie.resources import ModelResource
 

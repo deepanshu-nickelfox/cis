@@ -7,8 +7,8 @@ from tastypie.authentication import Authentication
 from tastypie.test import ResourceTestCase
 
 
-@patch('api.v2.hr.users.UsersResource._meta.authentication', Authentication())
-@patch('api.v2.hr.users.UsersResource._meta.authorization', Authorization())
+@patch('api.v1.hr.users.UsersResource._meta.authentication', Authentication())
+@patch('api.v1.hr.users.UsersResource._meta.authorization', Authorization())
 class Test(ResourceTestCase):
 
     def test_post_list(self):

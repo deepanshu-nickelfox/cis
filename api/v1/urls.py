@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url, include
-from api.v2.cis.auth import AuthResource
-from api.v2.hr.users import UsersResource
+from api.v1.cis.auth import AuthResource
+from api.v1.hr.users import UsersResource
 
 auth_resource = AuthResource()
 users_resource = UsersResource()

@@ -5,7 +5,7 @@ from tastypie.authorization import Authorization
 from tastypie.test import ResourceTestCase
 
 
-@patch('api.v2.hr.users.UsersResource._meta.authorization', Authorization())
+@patch('api.v1.hr.users.UsersResource._meta.authorization', Authorization())
 class Test(ResourceTestCase):
 
     def setUp(self):
