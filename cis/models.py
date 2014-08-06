@@ -1,7 +1,7 @@
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, \
-    BaseUserManager
+    BaseUserManager, Group
 from django.db import models
-from django.db.models.signals import pre_save, post_save
+from django.db.models.signals import pre_save, post_save, m2m_changed
 from django_extensions.db.models import TimeStampedModel
 from cis import signals
 from hr.models import Position
@@ -93,3 +93,6 @@ post_save.connect(
 pre_save.connect(
     signals.sync_user_groups_when_department_changes,
     sender=Position)
+
+m2m_changed.connect(
+    signals.admin_department_sync_workaround, sender=User.groups.through)

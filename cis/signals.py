@@ -39,6 +39,18 @@ def sync_user_groups_when_position_changes(sender, instance, **kwargs):
             instance.groups.add(instance.position.department)
 
 
+def admin_department_sync_workaround(sender, instance, action, **kwargs):
+    """
+    Django admin calls "clear" on groups field, thus nullifying sync signals
+    efforts. This is a workaround for it.
+
+    @type instance cis.models.User
+    """
+    if action == 'post_clear':
+        if instance.position and instance.position.department:
+            instance.groups.add(instance.position.department)
+
+
 def sync_user_groups_when_department_changes(sender, instance, **kwargs):
     """
     Auto-assign related users to the department group if position is updated and
