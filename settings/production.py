@@ -98,8 +98,6 @@ STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'cis.User'
 
-PASSWORD_MAX_LENGTH = 32
-
 # TODO: remove from production
 TASTYPIE_FULL_DEBUG = True
 
