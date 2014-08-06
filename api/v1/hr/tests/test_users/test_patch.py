@@ -38,4 +38,5 @@ class Test(ResourceTestCase):
             'first_name': obj.first_name,
             'middle_name': obj.middle_name,
             'sex': obj.sex,
+            'user_permissions': [],
         })

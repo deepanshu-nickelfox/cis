@@ -41,4 +41,5 @@ class Test(ResourceTestCase):
             'first_name': data['first_name'],
             'middle_name': data['middle_name'],
             'sex': data['sex'],
+            'user_permissions': [],
         })

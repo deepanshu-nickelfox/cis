@@ -74,7 +74,3 @@ class User(AbstractBaseUser, PermissionsMixin, TimeStampedModel):
         permissions = (
             ("read_user", "Can read user"),
         )
-
-
-
-

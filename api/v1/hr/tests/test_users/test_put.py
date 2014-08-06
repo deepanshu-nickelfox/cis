@@ -40,4 +40,5 @@ class Test(ResourceTestCase):
             'middle_name': obj.middle_name,
             'sex': obj.sex,
             'pk': str(obj.pk),  # todo ##fixme##
+            'user_permissions': [],
         })
