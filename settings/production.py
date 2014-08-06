@@ -48,8 +48,6 @@ INSTALLED_APPS = (
     'api',
     'cis',
     'hr',
-    'locations',
-    'inventory',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -102,3 +100,6 @@ AUTH_USER_MODEL = 'cis.User'
 TASTYPIE_FULL_DEBUG = True
 
 TASTYPIE_DATETIME_FORMATTING = "%Y-%m-%d %H:%M:%S"
+
+# If True, then some API's would require READ privileges
+FEATURE_REQUIRE_READ_PRIVILEGES = True

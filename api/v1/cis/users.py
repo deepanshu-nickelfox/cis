@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from api.v1.authorization import ReadRestrictedDjangoAuthorization
 from api.v1.cis.groups import GroupsResource
 from api.v1.cis.permissions import PermissionsResource
+from api.v1.hr.positions import PositionsResource
 from tastypie import fields
 from tastypie.authentication import SessionAuthentication
 from tastypie.resources import ModelResource
@@ -14,6 +15,9 @@ class UsersResource(ModelResource):
 
     groups = fields.ToManyField(
         GroupsResource, 'groups', full=True, null=True)
+
+    position = fields.ToOneField(
+        PositionsResource, 'position', full=True, null=True)
 
     class Meta:
         queryset = get_user_model().objects.all()

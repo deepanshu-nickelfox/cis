@@ -2,6 +2,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, \
     BaseUserManager
 from django.db import models
 from django_extensions.db.models import TimeStampedModel
+from hr.models import Position
 
 
 class UserManager(BaseUserManager):
@@ -43,6 +44,8 @@ class User(AbstractBaseUser, PermissionsMixin, TimeStampedModel):
     sex = models.NullBooleanField(null=True, blank=True)
 
     is_active = models.BooleanField(default=True)
+
+    position = models.ForeignKey(Position, null=True, blank=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
