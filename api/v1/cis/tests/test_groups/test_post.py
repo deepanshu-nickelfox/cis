@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.contrib.auth.models import Group
 from django.core.urlresolvers import reverse
 from mock import patch
