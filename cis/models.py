@@ -70,6 +70,11 @@ class User(AbstractBaseUser, PermissionsMixin, TimeStampedModel):
     def __str__(self):
         return self.fio
 
+    class Meta:
+        permissions = (
+            ("read_user", "Can read user"),
+        )
+
 
 
 

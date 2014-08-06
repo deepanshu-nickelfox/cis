@@ -3,7 +3,6 @@ from django.core.urlresolvers import reverse
 from model_mommy import mommy
 from rest_framework import status
 from rest_framework.test import APITestCase
-from cis.models import User
 
 
 class UserTestGet(APITestCase):
@@ -92,7 +91,6 @@ class UserTestPut(APITestCase):
         response = self.client.put(url, data=data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertDictContainsSubset(data, response.data)
-
 
 
 class UserTestAuthentication(APITestCase):
