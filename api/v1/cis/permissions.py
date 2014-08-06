@@ -16,4 +16,3 @@ class PermissionsResource(ModelResource):
         detail_allowed_methods = ['get']
         max_limit = 0
         limit = 0
-

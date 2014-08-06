@@ -41,4 +41,5 @@ class Test(ResourceTestCase):
             'sex': obj.sex,
             'pk': str(obj.pk),  # todo ##fixme##
             'user_permissions': [],
+            'groups': [],
         })
