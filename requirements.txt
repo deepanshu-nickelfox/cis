@@ -1,14 +1,9 @@
 Django==1.7c2
-Jinja2==2.7.3
-MarkupSafe==0.23
-Pygments==1.6
-Sphinx==1.2.2
 django-extensions==1.3.8
 django-nose==1.2
+django-reversion==1.8.2
 django-shell-plus==1.1.5
 -e git+https://github.com/lightsgoout/django-tastypie.git@5f27f2d12c545273ac1402e857f392c372c15c56#egg=django_tastypie-master
-djangorestframework==2.3.14
-docutils==0.12
 ipdb==0.8
 ipython==2.1.0
 mock==1.0.1

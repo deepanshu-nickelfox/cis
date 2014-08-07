@@ -1,5 +1,5 @@
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, \
-    BaseUserManager, Group
+    BaseUserManager
 from django.db import models
 from django.db.models.signals import pre_save, post_save, m2m_changed
 from django_extensions.db.models import TimeStampedModel
@@ -80,7 +80,6 @@ class User(AbstractBaseUser, PermissionsMixin, TimeStampedModel):
         permissions = (
             ("read_user", "Can read user"),
         )
-
 
 pre_save.connect(
     signals.sync_user_groups_when_position_changes,
