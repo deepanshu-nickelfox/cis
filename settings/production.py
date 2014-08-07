@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'shell_plus',
     'django_nose',
     'django_extensions',
+    'reversion',
 
     # Local apps
     'api',
@@ -51,6 +52,7 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'reversion.middleware.RevisionMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
